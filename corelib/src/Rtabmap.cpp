@@ -5335,17 +5335,13 @@ void Rtabmap::adjustLikelihood(std::map<int, float> & likelihood) const
 	for(std::map<int, float>::iterator iter=++likelihood.begin(); iter!= likelihood.end(); ++iter)
 	{
 		float value = iter->second;
-		iter->second = 1.0f;
-		if(value > mean+stdDev)
+		if(_virtualPlaceLikelihoodRatio==0)
 		{
-			if(_virtualPlaceLikelihoodRatio==0 && mean)
-			{
-				iter->second = (value-(stdDev-epsilon))/mean;
-			}
-			else if(_virtualPlaceLikelihoodRatio!=0 && stdDev)
-			{
-				iter->second = (value-mean)/stdDev;
-			}
+			iter->second = (value > mean+stdDev && mean) ? (value-(stdDev-epsilon))/mean : 1.0f;
+		}
+		else
+		{
+			iter->second = (value > mean && stdDev) ? (value-mean)/stdDev : 0.0f;
 		}
 
 		if(value > max)
@@ -5361,7 +5357,7 @@ void Rtabmap::adjustLikelihood(std::map<int, float> & likelihood) const
 	}
 	else if(_virtualPlaceLikelihoodRatio!=0 && max > mean)
 	{
-		likelihood.begin()->second = stdDev/(max-mean) + 1.0f;
+		likelihood.begin()->second = 2.0f * stdDev / (max-mean);
 	}
 	else
 	{
