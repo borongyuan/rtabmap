@@ -818,6 +818,7 @@ class RTABMAP_CORE_EXPORT Parameters
     RTABMAP_PARAM(Stereo, OpticalFlow,           bool, true,    "Use optical flow to find stereo correspondences, otherwise a simple block matching approach is used.");
     RTABMAP_PARAM(Stereo, SSD,                   bool, true,    uFormat("[%s=false] Use Sum of Squared Differences (SSD) window, otherwise Sum of Absolute Differences (SAD) window is used.", kStereoOpticalFlow().c_str()));
     RTABMAP_PARAM(Stereo, Eps,                   double, 0.01,  uFormat("[%s=true] Epsilon stop criterion.", kStereoOpticalFlow().c_str()));
+    RTABMAP_PARAM(Stereo, MinEigThreshold,       double, 1e-4,  uFormat("[%s=true] The threshold of the minimum eigenvalue of a feature's spatial gradient matrix. Used to filter out bad features. 0 means L1 distance between patches is used as an error measure.", kStereoOpticalFlow().c_str()));
     RTABMAP_PARAM(Stereo, Gpu,                   bool, false,   uFormat("[%s=true] Enable GPU version of the optical flow approach (only available if OpenCV is built with CUDA).", kStereoOpticalFlow().c_str()));
 
     RTABMAP_PARAM(Stereo, DenseStrategy,         int, 0,  "0=cv::StereoBM, 1=cv::StereoSGBM");

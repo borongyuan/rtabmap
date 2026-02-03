@@ -1678,6 +1678,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) :
 	_ui->stereo_maxDisparity->setObjectName(Parameters::kStereoMaxDisparity().c_str());
 	_ui->stereo_ssd->setObjectName(Parameters::kStereoSSD().c_str());
 	_ui->stereo_flow_eps->setObjectName(Parameters::kStereoEps().c_str());
+	_ui->stereo_flow_minEigThreshold->setObjectName(Parameters::kStereoMinEigThreshold().c_str());
 	_ui->stereo_opticalFlow->setObjectName(Parameters::kStereoOpticalFlow().c_str());
 	_ui->stereo_flow_gpu->setObjectName(Parameters::kStereoGpu().c_str());
 

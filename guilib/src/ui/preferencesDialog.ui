@@ -25532,7 +25532,39 @@ Lower the ratio -&gt; higher the precision.</string>
                          </property>
                         </widget>
                        </item>
+                       <item row="10" column="0">
+                        <widget class="QDoubleSpinBox" name="stereo_flow_minEigThreshold">
+                         <property name="decimals">
+                          <number>6</number>
+                         </property>
+                         <property name="minimum">
+                          <double>0.000000000000000</double>
+                         </property>
+                         <property name="maximum">
+                          <double>1.000000000000000</double>
+                         </property>
+                         <property name="singleStep">
+                          <double>0.000100000000000</double>
+                         </property>
+                         <property name="value">
+                          <double>0.000100000000000</double>
+                         </property>
+                        </widget>
+                       </item>
                        <item row="10" column="1">
+                        <widget class="QLabel" name="label_788">
+                         <property name="text">
+                          <string>[OpticalFlow = true] The threshold of the minimum eigenvalue of a feature's spatial gradient matrix. Used to filter out bad features. 0 means L1 distance between patches is used as an error measure.</string>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                         <property name="textInteractionFlags">
+                          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="11" column="1">
                         <widget class="QLabel" name="label_stereo_flow_gpu">
                          <property name="text">
                           <string>[OpticalFlow = true] Do optical flow on GPU. RTAB-Map should be built with OpenCV CUDA.</string>
@@ -25545,7 +25577,7 @@ Lower the ratio -&gt; higher the precision.</string>
                          </property>
                         </widget>
                        </item>
-                       <item row="10" column="0">
+                       <item row="11" column="0">
                         <widget class="QCheckBox" name="stereo_flow_gpu">
                          <property name="text">
                           <string/>

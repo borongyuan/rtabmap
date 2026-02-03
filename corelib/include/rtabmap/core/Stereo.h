@@ -96,6 +96,7 @@ public:
 #endif
 
 	float epsilon() const {return epsilon_;}
+	float minEigThreshold() const {return minEigThreshold_;}
 	virtual bool isGpuEnabled() const;
 
 private:
@@ -106,6 +107,7 @@ private:
 
 private:
 	float epsilon_;
+	float minEigThreshold_;
 	bool gpu_;
 };
 

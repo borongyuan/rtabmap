@@ -113,6 +113,7 @@ std::vector<cv::Point2f> Stereo::computeCorrespondences(
 StereoOpticalFlow::StereoOpticalFlow(const ParametersMap & parameters) :
 		Stereo(parameters),
 		epsilon_(Parameters::defaultStereoEps()),
+		minEigThreshold_(Parameters::defaultStereoMinEigThreshold()),
 		gpu_(Parameters::defaultStereoGpu())
 {
 	this->parseParameters(parameters);
@@ -122,6 +123,7 @@ void StereoOpticalFlow::parseParameters(const ParametersMap & parameters)
 {
 	Stereo::parseParameters(parameters);
 	Parameters::parse(parameters, Parameters::kStereoEps(), epsilon_);
+	Parameters::parse(parameters, Parameters::kStereoMinEigThreshold(), minEigThreshold_);
 	Parameters::parse(parameters, Parameters::kStereoGpu(), gpu_);
 #ifndef HAVE_OPENCV_CUDAOPTFLOW
 	if(gpu_)
@@ -171,8 +173,8 @@ std::vector<cv::Point2f> StereoOpticalFlow::computeCorrespondences(
 				err,
 				this->winSize(),
 				this->maxLevel(),
-				cv::TermCriteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, this->iterations(), epsilon_),
-				cv::OPTFLOW_LK_GET_MIN_EIGENVALS, 1e-4);
+				cv::TermCriteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, this->iterations(), this->epsilon()),
+				this->minEigThreshold()>0 ? cv::OPTFLOW_LK_GET_MIN_EIGENVALS : 0, this->minEigThreshold());
 		UDEBUG("util2d::calcOpticalFlowPyrLKStereo() end");
 	}
 	updateStatus(leftCorners, rightCorners, status);
